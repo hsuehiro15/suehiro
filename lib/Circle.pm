@@ -5,8 +5,6 @@ package Circle;
 use strict;
 use warnings;
 
-
-
 sub new{
     my $class = shift;
     my $self = { r => shift };
