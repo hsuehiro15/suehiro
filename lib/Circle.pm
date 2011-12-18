@@ -1,10 +1,11 @@
+package Circle;
 #!/usr/bin/perl
 # lib/Circle.pm
 
 use strict;
 use warnings;
 
-package Circle;
+
 
 sub new{
     my $class = shift;
