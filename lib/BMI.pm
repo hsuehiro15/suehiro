@@ -4,18 +4,22 @@ use Moose;
 has 'height' => (
      is => 'rw',
      isa => 'Num',
+     required => 1,
     );
 
 has 'weight' => (
      is => 'rw',
      isa => 'Num',
+     required => 1,
     );
+
 has 'weekyear' => (
      is => 'rw',
      isa => 'Int',
+    # required => 1,
     );
 
-sub body{
+sub bmi{
     my $self = shift;
     my $height = $self->height;
     my $weight = $self->weight;
@@ -25,7 +29,7 @@ sub body{
 
 sub man{
    my $self = shift;
-   my $bmi = $self->body();   
+   my $bmi = $self->bmi();   
    my $flag =
       ($bmi > 30) ? "obese" :
       ($bmi > 25) ? "overwieght":
@@ -34,9 +38,14 @@ sub man{
    return $flag;
 }
 
+__PACKAGE__->meta->make_immutable;
+
+no Moose;
+
+
 sub ninpu{
     my $self = shift;
-    my $bmi = $self->body();
+    my $bmi = $self->bmi();
     my $week = $self->weekyear;
     my $flag;
     if($week >= 40){
@@ -58,8 +67,5 @@ sub ninpu{
 
 
 
-__PACKAGE__->meta->make_immutable;
-
-no Moose;
 
 1;
