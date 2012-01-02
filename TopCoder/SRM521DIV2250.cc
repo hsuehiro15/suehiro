@@ -1,41 +1,62 @@
 #include<iostream>
-#include<cmath>
 #include<vector>
 
 using namespace std;
 
-int result;
-
-class PointErasingTwo{
+class RedAndGreen{
 public:
- int getMaximum(vector <int> y){
+ int minPaints(string row){
+ 
+  bool flag = false;
+  bool right = true;
+  int count = 0;
+  int j;
+  
+ shingi:
 
-    for(int i =0 ;i < y.size();i++){
-      for(int j = 0;j < y.size();j++){
-      
-     if(i == j)        
-        continue;
- 
-     int x1 = i;
-     int y1 = y[i];
-                 
-     int x2 = j;
-     int y2 = y[j];
- 
-    int  rowX = ( x1 < x2) ? x1 : x2;
-    int  rowY = (y1 < y2 ) ? y1 : y2;
- 
-    int highX = ( x1 < x2 ) ? x2 : x1;
-    int  highY = ( y1 < y2 ) ? y2 : y1;
-
-    int count = 0;
-    for(int k = 0; k < y.size();k++){
-       if(rowX < k &&  k < highX && rowY < y[k] && highY > y[k] )
-          count++; 
+ for(int i = 0;i < row.size();i++){
+    if(!flag){
+      if(row[i] == 'G'){  
+        flag = true;
+        j = i;
+      } 
     }
- result = max(result,count);
+ }
+ 
+ bool gt = false;
+ 
+ for(int i = j + 1; i < row.size();i++){
+   if(row[i] != 'G'){
+    gt = true;
+    break;
+   }
+ }
+ 
+ if(gt){
+ 
+ bool lr = false;
+ 
+ for(int i = 0;i <row.size();i++){
+   if(row[i] == 'G'){
+    row[i] = 'R';
+    int j = i;
+    lr = true;
+   }
+ break;
+}
+
+for(int i = row.size() -1 ; i >= 0;i--){
+  if(j < i && lr && row[i] == 'R' ){
+    row[i] = 'G';
+    count++;
+    break;
+  } 
+}
+ goto shingi;
+ 
+  }else{
+   return count;
   }
- }
- return result;
- }
-};
+ 
+  }
+ };
