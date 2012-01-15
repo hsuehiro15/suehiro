@@ -43,7 +43,7 @@ public:
     for(int i = 0; i*i <= M;i++){
       if(D(i,div,mul))
         CN++;
-      if(D(M/i,div,mul))
+      if(M/i != i && M%i == 0 && D(M/i,div,mul))
 	CN++;
     }
 
